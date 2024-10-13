@@ -48,6 +48,11 @@ const appointmentSchema = new mongoose.Schema({
     ],
     default: "Consultation",
   },
+  status: {
+    type: String,
+    enum: ["completed", "not completed"],
+    default: "not completed", // Default value
+  },
   createdAt: {
     type: Date,
     default: Date.now,

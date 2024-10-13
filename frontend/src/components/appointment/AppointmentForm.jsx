@@ -15,6 +15,7 @@ const AppointmentForm = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false); // State for submission success
 
   const validateUserName = (name) => {
     const regex = /^[a-zA-Z\s!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/;
@@ -51,6 +52,7 @@ const AppointmentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createAppointment(formData);
+    setIsSubmitted(true); // Show success pop-up
     setFormData({
       userName: "",
       contactNumber: "",
@@ -60,6 +62,11 @@ const AppointmentForm = () => {
       time: "",
       category: "Consultation",
     });
+
+    // Hide the success message after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 3000);
   };
 
   return (
@@ -67,6 +74,13 @@ const AppointmentForm = () => {
       <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
         Schedule your Appointment!
       </h2>
+      {isSubmitted && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+          <span className="block sm:inline">
+            Appointment submitted successfully!
+          </span>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700">Enter Your Name:</label>
@@ -91,6 +105,7 @@ const AppointmentForm = () => {
             onChange={handleChange}
             onKeyPress={handleKeyPress}
             required
+            maxLength={10}
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
