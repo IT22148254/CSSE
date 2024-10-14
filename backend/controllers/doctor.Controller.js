@@ -1,4 +1,4 @@
-const Doctor = require("../models/doctorModel");
+const Doctor = require("../models/doctor.Model");
 
 // @desc    Create a new doctor
 // @route   POST /api/doctors

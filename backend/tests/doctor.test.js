@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../index');
 const mongoose = require('mongoose');
-const Doctor = require('../models/doctorModel');
+const Doctor = require('../models/doctor.Model');
 
 const mockDoctor = {
     firstName: 'John',
