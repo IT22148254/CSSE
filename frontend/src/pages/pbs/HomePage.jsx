@@ -1,41 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import DoctorsGrid from '../../components/pbs/DoctorsGrid'; // Assuming this is where the grid of doctors is coming from
-import './HomePage.css'; // External CSS for styling
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import DoctorsGrid from "../../components/pbs/DoctorsGrid";
+import HospitalsGrid from "../../components/pbs/HospitalsGrid";
+import "./HomePage.css"; // External CSS for styling
+import axios from "axios";
 
 const HomePage = () => {
-  const [activeTab, setActiveTab] = useState('Doctors');
+  const [activeTab, setActiveTab] = useState("Doctors");
   const [doctors, setDoctors] = useState([]);
   const [hospitals, setHospitals] = useState([]); // Add hospitals state for the "Hospitals" tab
-  const [searchQuery, setSearchQuery] = useState(''); // Capture search input
+  const [searchQuery, setSearchQuery] = useState(""); // Capture search input
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/doctors/');
+        const response = await axios.get("http://localhost:5000/api/doctors/");
         setDoctors(response.data);
       } catch (error) {
-        setError('Error fetching data');
-        console.error('Error fetching data:', error);
+        setError("Error fetching data");
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    // const fetchHospitals = async () => {
-    //   try {
-    //     const response = await axios.get('http://localhost:5000/api/hospitals/');
-    //     setHospitals(response.data);
-    //   } catch (error) {
-    //     setError('Error fetching hospitals');
-    //     console.error('Error fetching hospitals:', error);
-    //   }
-    // };
+    const fetchHospitals = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/hospitals/"
+        );
+        //console.log(response.data.data);
+        setHospitals(response.data.data);
+      } catch (error) {
+        setError("Error fetching hospitals");
+        console.error("Error fetching hospitals:", error);
+      }
+    };
 
     fetchDoctors();
-    //fetchHospitals();
+    fetchHospitals();
   }, []);
 
   if (loading) {
@@ -57,7 +61,7 @@ const HomePage = () => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    setSearchQuery(''); // Reset search when switching tabs
+    setSearchQuery(""); // Reset search when switching tabs
   };
 
   const handleSearchChange = (e) => {
@@ -71,7 +75,7 @@ const HomePage = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder={`Search ${activeTab}...`} // Dynamic placeholder based on active tab
+            placeholder={`Search ${activeTab}...`}
             className="search-input"
             value={searchQuery}
             onChange={handleSearchChange}
@@ -82,34 +86,30 @@ const HomePage = () => {
 
       <div className="tabs-container">
         <button
-          className={`tab-button ${activeTab === 'Doctors' ? 'active' : ''}`}
-          onClick={() => handleTabClick('Doctors')}
+          className={`tab-button ${activeTab === "Doctors" ? "active" : ""}`}
+          onClick={() => handleTabClick("Doctors")}
         >
           Doctors
         </button>
         <button
-          className={`tab-button ${activeTab === 'Hospitals' ? 'active' : ''}`}
-          onClick={() => handleTabClick('Hospitals')}
+          className={`tab-button ${activeTab === "Hospitals" ? "active" : ""}`}
+          onClick={() => handleTabClick("Hospitals")}
         >
           Hospitals
         </button>
       </div>
 
       <div className="content-container">
-        {activeTab === 'Doctors' ? (
-          <DoctorsGrid doctors={filteredDoctors} /> // Pass filtered doctors to the DoctorsGrid
+        {activeTab === "Doctors" ? (
+          <DoctorsGrid doctors={filteredDoctors} />
         ) : (
-          <div>
+          <>
             {filteredHospitals.length > 0 ? (
-              <ul>
-                {filteredHospitals.map((hospital) => (
-                  <li key={hospital._id}>{hospital.name}</li>
-                ))}
-              </ul>
+              <HospitalsGrid hospitals={filteredHospitals} />
             ) : (
               <div>No hospitals found.</div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>

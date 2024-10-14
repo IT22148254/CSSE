@@ -1,0 +1,22 @@
+/* components/HospitalsGrid.css */
+.hospitals-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    padding: 16px;
+    background-color: #f9f9f9;
+  }
+  
+  @media (min-width: 600px) {
+    .hospitals-grid {
+      justify-content: space-between;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .hospitals-grid {
+      justify-content: flex-start;
+    }
+  }
+  

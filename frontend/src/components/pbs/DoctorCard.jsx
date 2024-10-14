@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './DoctorCard.css'; // Assuming you have a CSS file for styling
+import PropTypes, { object } from 'prop-types';
+import './DoctorCard.css';
 import { useNavigate } from 'react-router-dom';
 
 const DoctorCard = ({ doctor }) => {
@@ -15,7 +15,7 @@ const DoctorCard = ({ doctor }) => {
         <p className="doctor-card__specialisation">{doctor.specialisation}</p>
         <p className="doctor-card__email">{doctor.email}</p>
         <p className="doctor-card__titles">{doctor.titles.join(', ')}</p>
-        <p className="doctor-card__hospital">Hospital ID: {doctor.hospital}</p>
+        <p className="doctor-card__hospital">Hospital : {doctor.hospital.name}</p>
       </div>
     </div>
   );
@@ -29,7 +29,7 @@ DoctorCard.propTypes = {
     specialisation: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     titles: PropTypes.arrayOf(PropTypes.string).isRequired,
-    hospital: PropTypes.string.isRequired,
+    hospital: PropTypes.object.isRequired,
   }).isRequired,
 };
 
