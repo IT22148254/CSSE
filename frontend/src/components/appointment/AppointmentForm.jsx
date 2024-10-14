@@ -1,9 +1,11 @@
 // src/components/AppointmentForm.js
 import React, { useState } from "react";
 import { useAppointmentForm } from "../../hooks/appointment/useAppointmentForm";
+import { useNavigate } from "react-router-dom";
 
 const AppointmentForm = () => {
   const { createAppointment } = useAppointmentForm();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: "",
     contactNumber: "",
@@ -16,6 +18,7 @@ const AppointmentForm = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false); // State for submission success
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const validateUserName = (name) => {
     const regex = /^[a-zA-Z\s!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/;
@@ -53,6 +56,7 @@ const AppointmentForm = () => {
     e.preventDefault();
     await createAppointment(formData);
     setIsSubmitted(true); // Show success pop-up
+    setShowSuccessMessage(true);
     setFormData({
       userName: "",
       contactNumber: "",
@@ -65,16 +69,21 @@ const AppointmentForm = () => {
 
     // Hide the success message after 3 seconds
     setTimeout(() => {
-      setIsSubmitted(false);
+      setShowSuccessMessage(false);
     }, 3000);
   };
 
+  //redirected to the payment page
+  const handleProceedToPayment = () => {
+    navigate("/payment"); // Redirect to PaymentPage
+  };
+
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 mt-8">
+    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 mt-8 form-container">
       <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
         Schedule your Appointment!
       </h2>
-      {isSubmitted && (
+      {showSuccessMessage && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
           <span className="block sm:inline">
             Appointment submitted successfully!
@@ -90,7 +99,7 @@ const AppointmentForm = () => {
             value={formData.userName}
             onChange={handleChange}
             required
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:bg-blue-50 transition-colors duration-300"
           />
           {errors.userName && (
             <span className="text-red-500">{errors.userName}</span>
@@ -106,7 +115,7 @@ const AppointmentForm = () => {
             onKeyPress={handleKeyPress}
             required
             maxLength={10}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:bg-blue-50 transition-colors duration-300"
           />
         </div>
         <div>
@@ -119,7 +128,7 @@ const AppointmentForm = () => {
             required
             min={1}
             max={150}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:bg-blue-50 transition-colors duration-300"
           />
         </div>
         <div>
@@ -181,6 +190,14 @@ const AppointmentForm = () => {
           Submit
         </button>
       </form>
+      {isSubmitted && (
+        <button
+          onClick={handleProceedToPayment}
+          className="w-full mt-4 bg-green-600 text-white rounded-md py-2 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          Proceed to Payment
+        </button>
+      )}
     </div>
   );
 };
