@@ -43,7 +43,7 @@ exports.createDoctor = async (req, res) => {
 // @route   GET /api/doctors/:id
 exports.getDoctorById = async (req, res) => {
   try {
-    const doctor = await Doctor.findById(req.params.id);
+    const doctor = await Doctor.findById(req.params.id).populate("hospital");
     if (!doctor) {
       return res.status(404).json({ message: "Doctor not found" });
     }
@@ -120,7 +120,7 @@ exports.deleteDoctor = async (req, res) => {
 // @route   GET /api/doctors
 exports.getAllDoctors = async (req, res) => {
   try {
-    const doctors = await Doctor.find();
+    const doctors = await Doctor.find().populate("hospital");
     res.status(200).json(doctors);
   } catch (error) {
     console.error("Error fetching doctors: ", error);

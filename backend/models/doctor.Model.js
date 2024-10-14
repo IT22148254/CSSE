@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const doctorSchema = new mongoose.Schema({
     hospital: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Hospital',
+        ref: 'hospital',
         required: true
     },
     firstName: {
