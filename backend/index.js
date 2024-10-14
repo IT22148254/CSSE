@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 
 const connectDB = require('./config/db');
 
+const doctorRoutes = require('./routes/doctorRoutes');
+
 
 dotenv.config();
 
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(cors());        
 
 
+module.exports = app;
+
 // Database connection
 connectDB();
 
@@ -26,6 +30,8 @@ connectDB();
 
 // Routes
 // app.use('/api/users', userRoutes);
+
+app.use('/api/doctors', doctorRoutes);
 
 
 // Start the server
