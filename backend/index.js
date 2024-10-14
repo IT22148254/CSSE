@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 
 const doctorRoutes = require("./routes/doctor.Routes");
 const availableTimesRoutes = require("./routes/availableTimes.Routes");
+const hospitalRoutes = require("./routes/hospital.Routes");
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ connectDB();
 
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/available-times", availableTimesRoutes);
+app.use("/api/hospitals/",hospitalRoutes);
 
 if (process.env.NODE_ENV !== "test") {
   // Start the server
