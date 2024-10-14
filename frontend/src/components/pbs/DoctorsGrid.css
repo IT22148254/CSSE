@@ -1,0 +1,21 @@
+.doctors-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 16px;
+    background-color: #f9f9f9;
+  }
+  
+  @media (min-width: 600px) {
+    .doctors-grid {
+      justify-content: space-between;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .doctors-grid {
+      justify-content: flex-start;
+    }
+  }
+  
