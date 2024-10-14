@@ -1,0 +1,23 @@
+.available-times {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+  }
+  
+  .available-time-entry {
+    margin-bottom: 16px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .available-time-entry p {
+    margin: 4px 0;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
