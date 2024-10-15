@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import DoctorsGrid from "../../components/pbs/DoctorsGrid";
 import HospitalsGrid from "../../components/pbs/HospitalsGrid";
-import Sidebar from "../../components/pbs/Sidebar"; // Import Sidebar component
-import "./HomePage.css"; // External CSS for styling
+import Sidebar from "../../components/pbs/Sidebar"; 
+import "./HomePage.css"; 
 import axios from "axios";
-import { getHospitalData } from "../../util/authUtil"; // Import the utility function
+import { getHospitalData } from "../../util/authUtil";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState("Doctors");
   const [doctors, setDoctors] = useState([]);
-  const [hospitals, setHospitals] = useState([]); // Add hospitals state for the "Hospitals" tab
-  const [searchQuery, setSearchQuery] = useState(""); // Capture search input
+  const [hospitals, setHospitals] = useState([]); 
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
