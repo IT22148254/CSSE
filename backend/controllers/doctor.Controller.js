@@ -2,6 +2,8 @@ const Doctor = require("../models/doctor.Model");
 
 // @desc    Create a new doctor
 // @route   POST /api/doctors
+//@param {Object} req - The request object
+//@param {Object} res - The response object
 exports.createDoctor = async (req, res) => {
   try {
     const {
@@ -41,6 +43,8 @@ exports.createDoctor = async (req, res) => {
 
 // @desc    Get a doctor by ID
 // @route   GET /api/doctors/:id
+// @param {id} req - The request object
+// @param {Object} res - The response object
 exports.getDoctorById = async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id).populate("hospital");
@@ -56,6 +60,8 @@ exports.getDoctorById = async (req, res) => {
 
 // @desc    Get doctors by hospital
 // @route   GET /api/doctors/hospital/:hospitalId
+// @param {hospitalId} req - The request object
+// @param {Object} res - The response object
 exports.getDoctorsByHospital = async (req, res) => {
   try {
     const doctors = await Doctor.find({ hospital: req.params.hospitalId });
@@ -68,6 +74,8 @@ exports.getDoctorsByHospital = async (req, res) => {
 
 // @desc    Edit a doctor
 // @route   PUT /api/doctors/:id
+//@param {Object} req - The request object
+//@param {Object} res - The response object
 exports.editDoctor = async (req, res) => {
   try {
     const {
@@ -103,6 +111,8 @@ exports.editDoctor = async (req, res) => {
 
 // @desc    Delete a doctor
 // @route   DELETE /api/doctors/:id
+//@param {id} req - The request object
+//@param {Object} res - The response object
 exports.deleteDoctor = async (req, res) => {
   try {
     const doctor = await Doctor.findByIdAndDelete(req.params.id);
@@ -118,6 +128,8 @@ exports.deleteDoctor = async (req, res) => {
 
 // @desc    Get all doctors
 // @route   GET /api/doctors
+//@param {Object} req - The request object
+//@param {Object arr} res - The response object
 exports.getAllDoctors = async (req, res) => {
   try {
     const doctors = await Doctor.find().populate("hospital");

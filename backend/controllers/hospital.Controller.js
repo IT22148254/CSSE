@@ -8,6 +8,9 @@ exports.handleError = (res, error) => {
 };
 
 // Get all hospitals
+//@param {} req - The request object
+//@param {Object arr} res - The response object
+//route GET /api/hospitals
 exports.getAllHospitals = async (req, res) => {
   try {
     const hospitals = await Hospital.find();
@@ -18,6 +21,9 @@ exports.getAllHospitals = async (req, res) => {
 };
 
 // Get hospital by ID
+//@param {id} req - The request object
+//@param {Object} res - The response object
+//route GET /api/hospitals/:id
 exports.getHospitalById = async (req, res) => {
   try {
     const hospital = await Hospital.findById(req.params.id);
@@ -31,6 +37,9 @@ exports.getHospitalById = async (req, res) => {
 };
 
 // Create a new hospital
+//@param {Object} req - The request object
+//@param {Object} res - The response object
+//route POST /api/hospitals
 exports.createHospital = async (req, res) => {
   const { name, city, address, pic, hotline, email, password } = req.body;
 
@@ -59,6 +68,9 @@ exports.createHospital = async (req, res) => {
 };
 
 // Edit an existing hospital
+//@param {Object} req - The request object
+//@param {Object} res - The response object
+//route PUT /api/hospitals/:id
 exports.editHospital = async (req, res) => {
   const { name, city, address, pic, hotline, email } = req.body;
 
@@ -84,6 +96,9 @@ exports.editHospital = async (req, res) => {
 };
 
 // Delete a hospital by ID
+//@param {id} req - The request object
+//@param {Object} res - The response object
+//route DELETE /api/hospitals/:id
 exports.deleteHospital = async (req, res) => {
   try {
     const hospital = await Hospital.findByIdAndDelete(req.params.id);
@@ -97,6 +112,9 @@ exports.deleteHospital = async (req, res) => {
 };
 
 // Hospital login
+//@param {Object} req - The request object
+//@param {Object} res - The response object
+//route POST /api/hospitals/login
 exports.loginAsHospital = async (req, res) => {
     const { email, password } = req.body;
 

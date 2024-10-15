@@ -62,7 +62,7 @@ const ManageDoctorsPage = ({ onEdit, onDelete }) => {
         </thead>
         <tbody>
           {doctors.map((doctor) => (
-            <tr key={doctor._id}>
+            <tr key={doctor._id} onClick={()=>{navigate(`/available-times/${doctor._id}`)}}>
               <td>
                 <img
                   src={doctor.profilePic}

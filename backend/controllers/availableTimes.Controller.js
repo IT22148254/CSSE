@@ -36,8 +36,8 @@ exports.createAvailableTime = async (req, res) => {
 
 /**
  * Get all available times
- * @param {Object} req - The request object
- * @param {Object} res - The response object
+ * @param {} req - The request object
+ * @param {Object arr} res - The response object
  */
 exports.getAllAvailableTimes = async (req, res) => {
   try {
@@ -50,7 +50,7 @@ exports.getAllAvailableTimes = async (req, res) => {
 
 /**
  * Get available times by ID
- * @param {Object} req - The request object
+ * @param {id} req - The request object
  * @param {Object} res - The response object
  */
 exports.getAvailableTimesById = async (req, res) => {
@@ -66,7 +66,7 @@ exports.getAvailableTimesById = async (req, res) => {
 
 /**
  * Delete available times by ID
- * @param {Object} req - The request object
+ * @param {id} req - The request object
  * @param {Object} res - The response object
  */
 exports.deleteAvailableTimes = async (req, res) => {
@@ -82,7 +82,7 @@ exports.deleteAvailableTimes = async (req, res) => {
 
 /**
  * Update available times by ID
- * @param {Object} req - The request object
+ * @param {Object,id} req - The request object
  * @param {Object} res - The response object
  */
 exports.updateAvailableTimes = async (req, res) => {
@@ -102,7 +102,7 @@ exports.updateAvailableTimes = async (req, res) => {
 
 /**
  * Toggle the availability of available times
- * @param {Object} req - The request object
+ * @param {Object,id} req - The request object
  * @param {Object} res - The response object
  */
 exports.toggleAvailability = async (req, res) => {
