@@ -1,4 +1,3 @@
-// components/HospitalsGrid.jsx
 import React from 'react';
 import HospitalCard from './HospitalCard';
 import './HospitalsGrid.css'; // External CSS for grid styling

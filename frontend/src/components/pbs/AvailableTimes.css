@@ -1,23 +1,42 @@
 .available-times {
-    margin-top: 20px;
-    padding: 16px;
-    background-color: white;
+    padding: 24px;
+    background-color: #f4f4f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
   }
   
-  .available-time-entry {
+  .filters {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 16px;
+  }
+  
+  .filters input,
+  .filters select {
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
   }
   
-  .available-time-entry p {
-    margin: 4px 0;
+  .available-times-table {
+    width: 100%;
+    border-collapse: collapse;
   }
   
-  h2 {
-    text-align: center;
+  .available-times-table th,
+  .available-times-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .available-times-table th {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .available-times-table tr:nth-child(even) {
+    background-color: #f9f9f9;
   }
   

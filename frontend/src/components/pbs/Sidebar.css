@@ -1,0 +1,61 @@
+/* Sidebar.css */
+.sidebar {
+    width: 250px; /* Fixed width */
+    height: 100vh; /* Full height */
+    background-color: #f0f4ff; /* Light blue background */
+    color: #333; /* Dark text color */
+    padding: 20px; /* Padding around the content */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: fixed; /* Keep it fixed on the left */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+}
+
+/* Sidebar header */
+.sidebar h2 {
+    font-size: 24px; /* Header font size */
+    margin-bottom: 20px; /* Space below the header */
+    text-align: center; /* Centered text */
+}
+
+/* List styles */
+.sidebar ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+/* List item styles */
+.sidebar ul li {
+    margin: 15px 0; /* Space between items */
+}
+
+/* Link styles */
+.sidebar ul li a {
+    text-decoration: none; /* Remove underline */
+    color: #0277bd; /* Dark blue color for links */
+    padding: 10px; /* Padding for clickable area */
+    border-radius: 5px; /* Rounded corners */
+    display: block; /* Block-level for full clickable area */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+/* Hover effect for links */
+.sidebar ul li a:hover {
+    background-color: #b3e5fc; /* Light blue on hover */
+    color: #01579b; /* Darker blue text on hover */
+}
+
+/* Logout link styles */
+.sidebar a.logout {
+    margin-top: auto; /* Push to the bottom */
+    color: #e53935; /* Red color for logout */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Sidebar icon styles (optional) */
+.sidebar-icon {
+    width: 24px; /* Set a standard width for icons */
+    margin-right: 10px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon with text */
+}

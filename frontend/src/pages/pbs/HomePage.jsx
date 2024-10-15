@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import DoctorsGrid from "../../components/pbs/DoctorsGrid";
 import HospitalsGrid from "../../components/pbs/HospitalsGrid";
+import Sidebar from "../../components/pbs/Sidebar"; // Import Sidebar component
 import "./HomePage.css"; // External CSS for styling
 import axios from "axios";
+import { getHospitalData } from "../../util/authUtil"; // Import the utility function
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState("Doctors");
@@ -30,7 +32,6 @@ const HomePage = () => {
         const response = await axios.get(
           "http://localhost:5000/api/hospitals/"
         );
-        //console.log(response.data.data);
         setHospitals(response.data.data);
       } catch (error) {
         setError("Error fetching hospitals");
@@ -68,49 +69,53 @@ const HomePage = () => {
     setSearchQuery(e.target.value); // Update the search query as the user types
   };
 
+  const hospitalData = getHospitalData(); // Get hospital data from local storage
+
   return (
-    <div className="home-container">
-      <header className="header">
-        <h1>Welcome.</h1>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder={`Search ${activeTab}...`}
-            className="search-input"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <button className="search-button">Search</button>
+    <div className="home-page">
+      <Sidebar userEmail={hospitalData?.email || "Guest"} /> {/* Include Sidebar component */}
+      <div className="home-container">
+        <header className="header">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder={`Search ${activeTab}...`}
+              className="search-input"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <button className="search-button">Search</button>
+          </div>
+        </header>
+
+        <div className="tabs-container">
+          <button
+            className={`tab-button ${activeTab === "Doctors" ? "active" : ""}`}
+            onClick={() => handleTabClick("Doctors")}
+          >
+            Doctors
+          </button>
+          <button
+            className={`tab-button ${activeTab === "Hospitals" ? "active" : ""}`}
+            onClick={() => handleTabClick("Hospitals")}
+          >
+            Hospitals
+          </button>
         </div>
-      </header>
 
-      <div className="tabs-container">
-        <button
-          className={`tab-button ${activeTab === "Doctors" ? "active" : ""}`}
-          onClick={() => handleTabClick("Doctors")}
-        >
-          Doctors
-        </button>
-        <button
-          className={`tab-button ${activeTab === "Hospitals" ? "active" : ""}`}
-          onClick={() => handleTabClick("Hospitals")}
-        >
-          Hospitals
-        </button>
-      </div>
-
-      <div className="content-container">
-        {activeTab === "Doctors" ? (
-          <DoctorsGrid doctors={filteredDoctors} />
-        ) : (
-          <>
-            {filteredHospitals.length > 0 ? (
-              <HospitalsGrid hospitals={filteredHospitals} />
-            ) : (
-              <div>No hospitals found.</div>
-            )}
-          </>
-        )}
+        <div className="content-container">
+          {activeTab === "Doctors" ? (
+            <DoctorsGrid doctors={filteredDoctors} />
+          ) : (
+            <>
+              {filteredHospitals.length > 0 ? (
+                <HospitalsGrid hospitals={filteredHospitals} />
+              ) : (
+                <div>No hospitals found.</div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
