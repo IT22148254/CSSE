@@ -4,6 +4,7 @@ import DoctorProfile from './pages/pbs/DoctorProfile';
 import LoginPage from './pages/pbs/LoginPage';
 import AddDoctorPage from './pages/pbs/AddDoctorPage';
 import ManageDoctorsPage from './pages/pbs/ManageDoctorsPage';
+import EditDoctorPage from './pages/pbs/EditDoctorPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>} />
         <Route path='/add-doctor' element={<AddDoctorPage/>} />
         <Route path='/manage-doctors' element={<ManageDoctorsPage/>} />
+        <Route path='/edit-doctor/:id' element={<EditDoctorPage/>} />
       </Routes>
     </Router>
   );
