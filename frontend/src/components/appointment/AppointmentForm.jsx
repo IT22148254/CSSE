@@ -1,9 +1,9 @@
 // src/components/AppointmentForm.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppointmentForm } from "../../hooks/appointment/useAppointmentForm";
 import { useNavigate } from "react-router-dom";
 
-const AppointmentForm = () => {
+const AppointmentForm = ({ appointment, onSuccess }) => {
   const { createAppointment } = useAppointmentForm();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -19,6 +19,21 @@ const AppointmentForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false); // State for submission success
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  useEffect(() => {
+    if (appointment) {
+      // Populate the form data with the existing appointment data when editing
+      setFormData({
+        userName: appointment.userName,
+        contactNumber: appointment.contactNumber,
+        age: appointment.age,
+        doctor: appointment.doctor,
+        date: appointment.date.split("T")[0], // Format date correctly
+        time: appointment.time,
+        category: appointment.category,
+      });
+    }
+  }, [appointment]);
 
   const validateUserName = (name) => {
     const regex = /^[a-zA-Z\s!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/;
@@ -71,6 +86,10 @@ const AppointmentForm = () => {
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 3000);
+
+    if (onSuccess) {
+      onSuccess(); // Call the onSuccess prop if provided
+    }
   };
 
   //redirected to the payment page
