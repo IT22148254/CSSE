@@ -5,6 +5,7 @@ const {
   getAppointment,
   deleteAppointment,
   updateAppointment,
+  getAppointmentsByContactNumber,
 } = require("../controllers/appointmentController");
 
 const router = express.Router();
@@ -23,5 +24,8 @@ router.delete("/:id", deleteAppointment);
 
 // update a single appointment
 router.patch("/:id", updateAppointment);
+
+// get appointments by contact number
+router.get("/:contactNumber", getAppointmentsByContactNumber);
 
 module.exports = router;

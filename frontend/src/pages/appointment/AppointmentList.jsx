@@ -131,7 +131,7 @@ const AppointmentList = () => {
   });
 
   return (
-    <div className="max-w-4xl mx-auto mt-8">
+    <div className="max-w-5xl mx-auto mt-8">
       <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
         Appointments List
       </h2>
@@ -159,30 +159,30 @@ const AppointmentList = () => {
         <table className="w-full table-auto border-collapse">
           <thead>
             <tr className="bg-blue-100">
-              <th className="border p-2 text-left">Name</th>
-              <th className="border p-2 text-left">Contact</th>
-              <th className="border p-2 text-left">Age</th>
-              <th className="border p-2 text-left">Doctor</th>
-              <th className="border p-2 text-left">Date</th>
-              <th className="border p-2 text-left">Time</th>
-              <th className="border p-2 text-left">Category</th>
-              <th className="border p-2 text-left">Status</th>
-              <th className="border p-2 text-left">Actions</th>
+              <th className="border p-4 text-left">Name</th>
+              <th className="border p-4 text-left">Contact</th>
+              <th className="border p-4 text-left">Age</th>
+              <th className="border p-4 text-left">Doctor</th>
+              <th className="border p-4 text-left">Date</th>
+              <th className="border p-4 text-left">Time</th>
+              <th className="border p-4 text-left">Category</th>
+              <th className="border p-4 text-left">Status</th>
+              <th className="border p-4 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredAppointments.map((appointment) => (
               <tr key={appointment._id} className="hover:bg-gray-100">
-                <td className="border p-2">{appointment.userName}</td>
-                <td className="border p-2">{appointment.contactNumber}</td>
-                <td className="border p-2">{appointment.age}</td>
-                <td className="border p-2">{appointment.doctor}</td>
-                <td className="border p-2">
+                <td className="border p-4">{appointment.userName}</td>
+                <td className="border p-4">{appointment.contactNumber}</td>
+                <td className="border p-4">{appointment.age}</td>
+                <td className="border p-4">{appointment.doctor}</td>
+                <td className="border p-4">
                   {new Date(appointment.date).toLocaleDateString()}
                 </td>
-                <td className="border p-2">{appointment.time}</td>
-                <td className="border p-2">{appointment.category}</td>
-                <td className="border p-2">
+                <td className="border p-4">{appointment.time}</td>
+                <td className="border p-4">{appointment.category}</td>
+                <td className="border p-4">
                   <select
                     value={appointment.status}
                     onChange={(e) =>

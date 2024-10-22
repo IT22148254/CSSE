@@ -98,7 +98,7 @@ const AppointmentForm = ({ appointment, onSuccess }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 mt-8 form-container">
+    <div className="max-w-lg mx-auto bg-cyan-100 shadow-lg rounded-lg p-6 mt-8 form-container">
       <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
         Schedule your Appointment!
       </h2>
@@ -160,9 +160,18 @@ const AppointmentForm = ({ appointment, onSuccess }) => {
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             <option value="">Select a doctor</option>
-            <option value="Dr. Smith">Dr. Smith</option>
-            <option value="Dr. Johnson">Dr. Johnson</option>
-            <option value="Dr. Williams">Dr. Williams</option>
+            <option value="Dr. Suresh ">
+              Dr. Suresh Wijesinghe - Cardiologist
+            </option>
+            <option value="Dr. Anura">
+              Dr. Anura Jayasinghe - Neurologist
+            </option>
+            <option value="Dr. Kanchana">
+              Dr. Kanchana Dissanayake - Endocrinologist
+            </option>
+            <option value="Dr. Niranjan">
+              Dr. Niranjan Kodikara - Oncologist
+            </option>
           </select>
         </div>
         <div>

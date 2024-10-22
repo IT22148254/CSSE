@@ -46,13 +46,13 @@ const deleteAppointment = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ message: "Appointment not found" });
+    return res.status(400).json({ message: "Appointment not found" });
   }
 
   const appointment = await Appointment.findOneAndDelete({ _id: id });
 
   if (!appointment) {
-    return res.status(400).json({ message: "Appointment not found" });
+    return res.status(404).json({ message: "Appointment not found" });
   }
   res.status(200).json(appointment);
 };
@@ -69,19 +69,44 @@ const updateAppointment = async (req, res) => {
     { _id: id },
     {
       ...req.body,
-    }
+    },
+    { new: true } // insure updated document is returned
   );
 
   if (!appointment) {
-    return res.status(400).json({ message: "Appointment not found" });
+    return res.status(404).json({ message: "Appointment not found" });
   }
   res.status(200).json(appointment);
 };
 
+//get particular user using contactNumber
+const getAppointmentsByContactNumber = async (req, res) => {
+  const { contactNumber } = req.params; // Extract contactNumber from the URL parameter
+
+  try {
+    // Find appointments with the matching contactNumber
+    const appointments = await Appointment.find({ contactNumber });
+
+    // Check if appointments are found
+    if (appointments.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No appointments found for this contact number." });
+    }
+
+    // Return the found appointments
+    res.status(200).json(appointments);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to fetch appointments", details: error.message });
+  }
+};
 module.exports = {
   getAppointments,
   getAppointment,
   createAppointment,
   deleteAppointment,
   updateAppointment,
+  getAppointmentsByContactNumber,
 };
