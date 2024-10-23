@@ -78,12 +78,20 @@ app.get("/user", (req, res) => {
 });
 
 // Register Route
-app.post("/register", (req, res) => {
-    // Create a new employee with the provided data
-    UserModel.create(req.body)
-        .then(employee => res.status(201).json(employee))
-        .catch(err => res.status(500).json(err.message));
-});
+app.post('/register', async (req, res) => {
+    try {
+      const { name, email, password } = req.body;
+      const user = await UserModel.create({ name, email, password });
+      res.status(201).json({ name: user.name, email: user.email });
+    } catch (err) {
+      if (err.code === 11000) { // MongoDB duplicate key error code
+        res.status(500).json({ message: 'Email already exists' });
+      } else {
+        res.status(500).json({ message: err.message });
+      }
+    }
+  });
+  
 
 //view
 app.get("/profile", (req, res) => {
@@ -268,11 +276,14 @@ app.delete('/users/:id', async (req, res) => {
 
 
 // Port setup
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
-    console.log(
+if (process.env.NODE_ENV !== 'test') {
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log(
         `Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`
-            .bgCyan.white
-    );
-});
+          .bgCyan.white
+      );
+    });
+  }
+// Export the app for testing purposes
+module.exports = app;
